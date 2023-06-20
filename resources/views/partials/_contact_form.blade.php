@@ -1,7 +1,7 @@
 {{-- THIS CONTACT FORM MUST BE INCLUDED WITH layout.blade.php
     OR INCLUDE css/LCLbootstrap.css (I have no idea why regular
     Bootstrap doesn't work) --}}
-<section class="ftco-section">
+<section style="padding: 5em 0">
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">

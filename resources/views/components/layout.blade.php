@@ -11,12 +11,14 @@
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
-    <link href="{{ asset('css/LCLbootstrap.css') }}" rel="stylesheet" type="text/css" >
+    <link href="{{ asset('css/LCLbootstrap.css') }}" rel="stylesheet" type="text/css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
     <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
     <script src="//unpkg.com/alpinejs" defer></script>
     <script src="https://cdn.tailwindcss.com"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js" integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.11.6/dist/umd/popper.min.js"
+        integrity="sha384-oBqDVmMz9ATKxIep9tiCxS/Z9fNfEXiDAYTujMAeBAsjFuCZSmKbSSUnQlmh/jp3" crossorigin="anonymous">
+    </script>
     <script>
         tailwind.config = {
             theme: {
@@ -28,36 +30,49 @@
             },
         };
     </script>
-    <title>Docutheque | Province De Sidi Slimane</title>
+    <style>
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        footer {
+            margin-top: auto;
+        }
+    </style>
+    <title>Docutheque | Province de Sidi Slimane</title>
 </head>
 
 <body>
     <nav class="flex justify-between items-center p-2">
         <a href="/">
             <div>
-                <img class="img-fluid" style="width: 50%;" src="{{ asset('images/ProvinceSidiSlimane.png') }}" alt="" />
+                <img class="img-fluid" style="width: 50%;" src="{{ asset('images/ProvinceSidiSlimane.png') }}"
+                    alt="" />
             </div>
         </a>
         <ul class="flex space-x-6 mr-6 text-lg">
             @auth
                 <li>
                     <span class="font-bold uppercase">
-                        Welcome {{ auth()->user()->name }}
+                        Bienvenu {{ auth()->user()->name }}
                     </span>
                 </li>
                 <li>
-                    <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear"></i>
-                        Manage Listings</a>
+                    <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear mr-1"></i>
+                        Gestion des Documents</a>
                 </li>
                 <li>
                     <form class="inline" action="/logout" method="POST">
                         @csrf
-                        <button type="submit"><i class="fa-solid fa-door-closed"></i> Logout</button>
+                        <button type="submit"><i class="fa-solid fa-door-closed mr-1"></i> Logout</button>
                     </form>
                 </li>
             @else
                 <li>
-                    <a href="/register" class="hover:text-laravel"><i class="fa-solid fa-user-plus mr-1"></i> Cr&eacute;er un compte</a>
+                    <a href="/register" class="hover:text-laravel"><i class="fa-solid fa-user-plus mr-1"></i> Cr&eacute;er
+                        un compte</a>
                 </li>
                 <li>
                     <a href="/login" class="hover:text-laravel"><i class="fa-solid fa-arrow-right-to-bracket mr-1"></i>
@@ -66,17 +81,19 @@
             @endauth
         </ul>
     </nav>
-    <hr style="height: 5px; background-color: laravel; width: 100%; border: none;">
     <main>
         {{ $slot }}
     </main>
+
     <footer>
         <!--Copyright section-->
         <div class="bg-neutral-200 p-4 text-center text-neutral-700 dark:bg-neutral-700 dark:text-neutral-200">
             © 2023 Copyright:
-            <a class="text-neutral-800 dark:text-neutral-400" href="http://www.provincesidislimane.ma">Province de Sidi Slimane</a>
+            <a class="text-neutral-800 dark:text-neutral-400" href="http://www.provincesidislimane.ma">Province de Sidi
+                Slimane</a>
         </div>
     </footer>
+    <x-flash-message />
 </body>
 
 </html>

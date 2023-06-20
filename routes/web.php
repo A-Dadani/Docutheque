@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
 /*
@@ -13,7 +14,16 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-// Returns the home page view
+// Show Home Page
 Route::get('/', function () {
     return view('accueil');
 });
+
+// Show Login Form
+Route::get('/login', [UserController::class, 'login'])->middleware('guest');
+
+// Authenticate User
+Route::post('/authenticate', [UserController::class, 'authenticate']);
+
+// Logout
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
