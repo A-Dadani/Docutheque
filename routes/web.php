@@ -1,5 +1,6 @@
 <?php
 
+use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -18,6 +19,9 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', function () {
     return view('accueil');
 });
+
+// Store Contact Messages (from contact form on the home page)
+Route::post('/contactus', [ContactMessageController::class, 'store']);
 
 // Show Login Form
 Route::get('/login', [UserController::class, 'login'])->middleware('guest');

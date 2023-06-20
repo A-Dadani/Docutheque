@@ -5,43 +5,52 @@
     <div class="container">
         <div class="row justify-content-center">
             <div class="col-md-12">
-                <div class="wrapper">
-                    
+                <div class="wrapper" id="contacternous">
                     <div class="row no-gutters">
                         <div class="col-md-7">
                             <div class="contact-wrap w-100 p-md-5 p-4">
                                 <h3 class="mb-4">Des questions? Contactez nous!</h3>
-                                <div id="form-message-warning" class="mb-4"></div>
-                                <div id="form-message-success" class="mb-4">
-                                    Your message was sent, thank you!
-                                </div>
-                                <form method="POST" id="contactForm" name="contactForm" class="contactForm">
+                                <form method="POST" action="contactus" id="contactForm" name="contactForm"
+                                    class="contactForm">
+                                    @csrf
                                     <div class="row">
                                         <div class="col-md-6">
                                             <div class="form-group">
-                                                <label class="label" for="name">Nom et Pr&eacute;nom</label>
-                                                <input type="text" class="form-control" name="name" id="name"
-                                                    placeholder="Nom">
+                                                <label class="label" for="full_name">Nom et Pr&eacute;nom</label>
+                                                <input type="text" class="form-control" name="full_name"
+                                                    id="name" placeholder="Nom" value="{{ old('full_name') }}">
+                                                @error('full_name')
+                                                    <p class="text-red-500 text-xs mb-1">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-6">
                                             <div class="form-group">
                                                 <label class="label" for="email">Adresse Email</label>
                                                 <input type="email" class="form-control" name="email" id="email"
-                                                    placeholder="Email">
+                                                    placeholder="Email" value="{{ old('email') }}">
+                                                @error('email')
+                                                    <p class="text-red-500 text-xs mb-1">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="label" for="subject">Objet</label>
-                                                <input type="text" class="form-control" name="subject" id="subject"
-                                                    placeholder="Objet">
+                                                <label class="label" for="objet">Objet</label>
+                                                <input type="text" class="form-control" name="objet" id="subject"
+                                                    placeholder="Objet" value="{{ old('objet') }}">
+                                                @error('objet')
+                                                    <p class="text-red-500 text-xs mb-1">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
                                             <div class="form-group">
-                                                <label class="label" for="#">Message</label>
-                                                <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Message"></textarea>
+                                                <label class="label" for="message">Message</label>
+                                                <textarea name="message" class="form-control" id="message" cols="30" rows="4" placeholder="Message">{{ old('message') }}</textarea>
+                                                @error('message')
+                                                    <p class="text-red-500 text-xs mb-1">{{ $message }}</p>
+                                                @enderror
                                             </div>
                                         </div>
                                         <div class="col-md-12">
@@ -66,7 +75,8 @@
                                     <span class="fa fa-map-marker"></span>
                                 </div>
                                 <div class="text">
-                                    <p><span>Address:</span> Si&egrave;ge de Province de Sidi Slimane. Pr&egrave;s du Tribunal de Premi&egrave;re Instance</p>
+                                    <p><span>Address:</span> Si&egrave;ge de Province de Sidi Slimane. Pr&egrave;s du
+                                        Tribunal de Premi&egrave;re Instance</p>
                                 </div>
                             </div>
                         </div>
@@ -76,7 +86,8 @@
                                     <span class="fa fa-phone"></span>
                                 </div>
                                 <div class="text">
-                                    <p><span>Num&eacute;ro de Telephone:</span> <a href="tel://0537502953">05 37 50 29 53</a></p>
+                                    <p><span>Num&eacute;ro de Telephone:</span> <a href="tel://0537502953">05 37 50 29
+                                            53</a></p>
                                 </div>
                             </div>
                         </div>
@@ -86,7 +97,9 @@
                                     <span class="fa fa-paper-plane"></span>
                                 </div>
                                 <div class="text">
-                                    <p><span>Email:</span> <a href="mailto:contact@provincesidislimane.ma">contact@provincesidislimane.ma</a></p>
+                                    <p><span>Email:</span> <a
+                                            href="mailto:contact@provincesidislimane.ma">contact@provincesidislimane.ma</a>
+                                    </p>
                                 </div>
                             </div>
                         </div>
@@ -96,7 +109,8 @@
                                     <span class="fa fa-globe"></span>
                                 </div>
                                 <div class="text">
-                                    <p><span>Site Web:</span> <a href="http://www.provincesidislimane.ma" target="_blank">www.provincesidislimane.ma</a></p>
+                                    <p><span>Site Web:</span> <a href="http://www.provincesidislimane.ma"
+                                            target="_blank">www.provincesidislimane.ma</a></p>
                                 </div>
                             </div>
                         </div>
