@@ -5,7 +5,7 @@
     <meta charset="UTF-8" />
     <meta http-equiv="X-UA-Compatible" content="IE=edge" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="icon" href="images/favicon.ico" />
+    <link rel="icon" href="{{ asset('favicon.ico') }}" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
         integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
@@ -41,7 +41,7 @@
             margin-top: auto;
         }
     </style>
-    <title>Docutheque | Province de Sidi Slimane</title>
+    <title>Docuth&egrave;que &bull; Province de Sidi Slimane</title>
 </head>
 
 <body>
@@ -56,13 +56,20 @@
             @auth
                 <li>
                     <span class="font-bold uppercase">
-                        Bienvenu {{ auth()->user()->name }}
+                        Bienvenue {{ auth()->user()->name }}
                     </span>
                 </li>
-                <li>
-                    <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear mr-1"></i>
-                        Gestion des Documents</a>
-                </li>
+                @if (auth()->user()->role == 'RespoCommunication')
+                    <li>
+                        <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-envelope mr-1"></i>
+                            Gestion de messagerie</a>
+                    </li>
+                @else
+                    <li>
+                        <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear mr-1"></i>
+                            Gestion des Documents</a>
+                    </li>
+                @endif
                 <li>
                     <form class="inline" action="/logout" method="POST">
                         @csrf

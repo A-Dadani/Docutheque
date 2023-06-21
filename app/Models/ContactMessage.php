@@ -15,4 +15,11 @@ class ContactMessage extends Model
         'objet',
         'message'
     ];
+
+    public function scopeFilter($query, array $filters) {
+        if ($filters['search'] ?? false) {
+            $query->where('title', 'like', '%' . request('search') . '%')
+                ->orWhere('full_name', 'like', '%' . request('search') . '%');
+        }
+    }
 }

@@ -8,6 +8,12 @@ use Illuminate\Support\Facades\Validator;
 
 class ContactMessageController extends Controller
 {
+    public function index() {
+        return view('messages.index', [
+            'messages' => ContactMessage::latest()->filter(request(['search']))->get(),
+        ]);
+    }
+
     public function store(Request $request) {
         $validator = Validator::make(request()->all(), [
             'full_name' => 'required',
