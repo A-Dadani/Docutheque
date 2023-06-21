@@ -5,10 +5,15 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use App\Models\ContactMessage;
 use Illuminate\Support\Facades\Validator;
+use Illuminate\Support\Facades\Gate;
 
 class ContactMessageController extends Controller
 {
     public function index() {
+        if (!Gate::allows('view-messages')) {
+            abort(403);
+        }
+
         return view('messages.index', [
             'messages' => ContactMessage::latest()->filter(request(['search']))->get(),
         ]);

@@ -24,10 +24,10 @@ Route::get('/', function () {
 Route::post('/contactus', [ContactMessageController::class, 'store']);
 
 //Show Contact Messages
-Route::get('/messages', [ContactMessageController::class, 'index']);
+Route::get('/messages', [ContactMessageController::class, 'index'])->middleware('auth');
 
 // Show Login Form
-Route::get('/login', [UserController::class, 'login'])->middleware('guest');
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 // Authenticate User
 Route::post('/authenticate', [UserController::class, 'authenticate']);

@@ -76,7 +76,7 @@
                                 </div>
                                 <div class="text">
                                     <p><span>Address:</span> Si&egrave;ge de Province de Sidi Slimane. Pr&egrave;s du
-                                        Tribunal de Premi&egrave;re Instance</p>
+                                        Tribunal de Premi&egrave;re Instance.</p>
                                 </div>
                             </div>
                         </div>
