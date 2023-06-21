@@ -15,7 +15,7 @@ class ContactMessageController extends Controller
         }
 
         return view('messages.index', [
-            'messages' => ContactMessage::latest()->filter(request(['search']))->get(),
+            'messages' => ContactMessage::latest()->filter(request(['search']))->paginate(10),
         ]);
     }
 
@@ -39,5 +39,14 @@ class ContactMessageController extends Controller
         }
         ContactMessage::create($request->all());
         return redirect('/#contacternous')->with('message', 'Message envoyé!');
+    }
+
+    public function destroy(ContactMessage $message) {
+        if (!Gate::allows('delete-messages')) {
+            abort(403);
+        }
+        
+        $message->delete();
+        return redirect('/messages')->with('message', 'Message supprimé avec succes');
     }
 }

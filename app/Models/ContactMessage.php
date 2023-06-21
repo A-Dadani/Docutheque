@@ -18,7 +18,7 @@ class ContactMessage extends Model
 
     public function scopeFilter($query, array $filters) {
         if ($filters['search'] ?? false) {
-            $query->where('title', 'like', '%' . request('search') . '%')
+            $query->where('objet', 'like', '%' . request('search') . '%')
                 ->orWhere('full_name', 'like', '%' . request('search') . '%');
         }
     }

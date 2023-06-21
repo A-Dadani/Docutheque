@@ -20,12 +20,6 @@ Route::get('/', function () {
     return view('accueil');
 });
 
-// Store Contact Messages (from contact form on the home page)
-Route::post('/contactus', [ContactMessageController::class, 'store']);
-
-//Show Contact Messages
-Route::get('/messages', [ContactMessageController::class, 'index'])->middleware('auth');
-
 // Show Login Form
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
@@ -34,3 +28,12 @@ Route::post('/authenticate', [UserController::class, 'authenticate']);
 
 // Logout
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+
+// Store Contact Messages (from contact form on the home page)
+Route::post('/contactus', [ContactMessageController::class, 'store']);
+
+// Show All Contact Messages
+Route::get('/messages', [ContactMessageController::class, 'index'])->middleware('auth');
+
+// Delete a Contact Message
+Route::delete('/messages/{message}', [ContactMessageController::class, 'destroy'])->middleware('auth');

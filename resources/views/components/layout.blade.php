@@ -62,7 +62,7 @@
                 @if (auth()->user()->role == 'RespoCommunication')
                     <li>
                         <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-envelope mr-1"></i>
-                            Gestion de messagerie</a>
+                            Messagerie</a>
                     </li>
                 @else
                     <li>
