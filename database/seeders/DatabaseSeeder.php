@@ -12,19 +12,21 @@ class DatabaseSeeder extends Seeder
      */
     public function run(): void
     {
-        // $roles = ['admin', 'RespoCommunication', 'chefDep'];
-        // for($i=0;$i<20;$i++){
-        //     $dep = rand(1, 5);
-        //     $selectedRole = rand(0, 2);
-        //     if ($roles[$selectedRole] == 'admin' || $roles[$selectedRole] == 'RespoCommunication') {
-        //         $dep = 'all';
-        //     }
-        //     \App\Models\User::factory(1)->create([
-        //         'role' => $roles[$selectedRole],
-        //         'department' => $dep,
-        //         'password' => bcrypt('password')
-        //     ]);
-        // }
+        $roles = ['admin', 'RespoCommunication', 'chefDep', 'employeDep'];
+        for($i=0;$i<40;$i++){
+            $dep = rand(1, 5);
+            $selectedRole = rand(0, 3);
+            if ($roles[$selectedRole] == 'admin' || $roles[$selectedRole] == 'RespoCommunication') {
+                $dep = 'all';
+            }
+            \App\Models\User::factory(1)->create([
+                'role' => $roles[$selectedRole],
+                'department' => $dep,
+                'confirmed' => !!rand(0, 1),
+                'password' => bcrypt('password'),
+
+            ]);
+        }
 
         // \App\Models\User::factory(1)->create([
         //     'role' => 'RespoCommunication',
@@ -37,17 +39,17 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        for ($i = 0; $i < 50; $i++) {
-            \App\Models\ContactMessage::create([
-                'full_name' => 'Example NAME' . $i,
-                'email' => 'email' . $i . '@gmail.com',
-                'objet' => 'Lorem Ipsum Dolor Sit Amet' . $i,
-                'message' => $i . 'Lorem ipsum dolor sit amet. Cum illum nesciunt et eveniet dolores vel unde galisum aut possimus neque At ratione debitis sed illo sapiente est enim nemo. A harum eius non praesentium quae vel beatae ducimus ut minima incidunt sit nulla debitis non ipsam rerum et dolorem voluptatem. Nam dolores voluptas aut saepe voluptate sed error sint non suscipit magni ea perferendis eligendi est galisum incidunt et fugiat dolor!
+        // for ($i = 0; $i < 50; $i++) {
+        //     \App\Models\ContactMessage::create([
+        //         'full_name' => 'Example NAME' . $i,
+        //         'email' => 'email' . $i . '@gmail.com',
+        //         'objet' => 'Lorem Ipsum Dolor Sit Amet' . $i,
+        //         'message' => $i . 'Lorem ipsum dolor sit amet. Cum illum nesciunt et eveniet dolores vel unde galisum aut possimus neque At ratione debitis sed illo sapiente est enim nemo. A harum eius non praesentium quae vel beatae ducimus ut minima incidunt sit nulla debitis non ipsam rerum et dolorem voluptatem. Nam dolores voluptas aut saepe voluptate sed error sint non suscipit magni ea perferendis eligendi est galisum incidunt et fugiat dolor!
 
-                Aut voluptatibus suscipit ad blanditiis architecto vel dolores eveniet in debitis deleniti est velit aspernatur quo officia consequatur. Ut voluptatem sapiente sit odit debitis non voluptatum corrupti et minus ipsa et nostrum galisum. Nam amet delectus sit culpa ipsam eos quasi eligendi sed molestiae recusandae ut veniam voluptate. Vel voluptas ullam et doloribus sint et perspiciatis possimus qui officiis omnis est illum ipsum et voluptatibus quidem!
+        //         Aut voluptatibus suscipit ad blanditiis architecto vel dolores eveniet in debitis deleniti est velit aspernatur quo officia consequatur. Ut voluptatem sapiente sit odit debitis non voluptatum corrupti et minus ipsa et nostrum galisum. Nam amet delectus sit culpa ipsam eos quasi eligendi sed molestiae recusandae ut veniam voluptate. Vel voluptas ullam et doloribus sint et perspiciatis possimus qui officiis omnis est illum ipsum et voluptatibus quidem!
                 
-                In reiciendis numquam et omnis magnam sit reprehenderit iure. Qui rerum quaerat est reiciendis velit vel tempore quae a neque error. Non sapiente velit et repudiandae excepturi ut minima quia non autem vero sed nobis consequatur est mollitia autem. Aut quaerat fugiat vel consequatur voluptatem ut aspernatur quia et laudantium voluptas aut odit ducimus sit perferendis consequuntur non temporibus optio.'
-            ]);
-        }
+        //         In reiciendis numquam et omnis magnam sit reprehenderit iure. Qui rerum quaerat est reiciendis velit vel tempore quae a neque error. Non sapiente velit et repudiandae excepturi ut minima quia non autem vero sed nobis consequatur est mollitia autem. Aut quaerat fugiat vel consequatur voluptatem ut aspernatur quia et laudantium voluptas aut odit ducimus sit perferendis consequuntur non temporibus optio.'
+        //     ]);
+        // }
     }
 }

@@ -18,7 +18,14 @@ class UserController extends Controller
 
         if (auth()->attempt($formFields)) {
             $request->session()->regenerate();
+            if (!auth()->user()->confirmed) {
+                auth()->logout();
+        
+                $request->session()->invalidate();
+                $request->session()->regenerateToken();
 
+                return redirect('/login')->withErrors(['email' => 'Votre compte n\'est pas encore vérifié. Contactez votre adiministrateur pour plus d\'informations.'])->onlyInput('email');
+            }
             return redirect('/')->with('message', 'Vous êtes connecté(e)s!');
         }
 

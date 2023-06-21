@@ -23,11 +23,11 @@ class AuthServiceProvider extends ServiceProvider
     public function boot(): void
     {
         Gate::define('view-messages', function(User $user) {
-            return (($user->role == 'RespoCommunication') || ($user->role == 'admin')); //Change or add rules here
+            return (($user->confirmed) && (($user->role == 'RespoCommunication') || ($user->role == 'admin'))); //Change or add rules here
         });
-        
+
         Gate::define('delete-messages', function(User $user) {
-            return (($user->role == 'RespoCommunication') || ($user->role == 'admin')); //Change or add rules here
+            return (($user->confirmed) && (($user->role == 'RespoCommunication') || ($user->role == 'admin'))); //Change or add rules here
         });
     }
 }
