@@ -7,9 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="icon" href="{{ asset('favicon.ico') }}" />
     <link href='https://fonts.googleapis.com/css?family=Roboto:400,100,300,700' rel='stylesheet' type='text/css'>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css"
-        integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g=="
-        crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
     <link href="{{ asset('css/LCLbootstrap.css') }}" rel="stylesheet" type="text/css">
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/4.1.1/js/bootstrap.min.js"></script>
@@ -48,18 +46,32 @@
     <nav class="flex justify-between items-center p-2">
         <a href="/">
             <div>
-                <img class="img-fluid" style="width: 50%;" src="{{ asset('images/ProvinceSidiSlimane.png') }}"
+                <img class="img-fluid" width="220" src="{{ asset('images/ProvinceSidiSlimane.png') }}"
                     alt="" />
             </div>
         </a>
         <ul class="flex space-x-6 mr-6 text-lg">
             @auth
-                <li>
-                    <span class="font-bold uppercase">
-                        Bienvenue {{ auth()->user()->name }}
-                    </span>
-                </li>
-                @if (auth()->user()->role == 'RespoCommunication')
+                @if (auth()->user()->role == 'admin')
+                    {{-- Administrateur / Chef --}}
+                    <li>
+                        <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-user-group mr-1"></i>
+                            Demandes d&apos;inscription</a>
+                    </li>
+                    <li>
+                        <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-users-gear mr-1"></i>
+                            Gestion de d&eacute;partements</a>
+                    </li>
+                    <li>
+                        <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-file-lines mr-1"></i>
+                            Gestion de documents</a>
+                    </li>
+                    <li>
+                        <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-envelope mr-1"></i>
+                            Messagerie</a>
+                    </li>
+                @elseif (auth()->user()->role == 'RespoCommunication')
+                    {{-- Responsable de communication --}}
                     <li>
                         <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-envelope mr-1"></i>
                             Messagerie</a>
@@ -73,7 +85,7 @@
                 <li>
                     <form class="inline" action="/logout" method="POST">
                         @csrf
-                        <button type="submit"><i class="fa-solid fa-door-closed mr-1"></i> Logout</button>
+                        <button type="submit"><i class="fa-solid fa-right-from-bracket mr-1"></i> Se déconnecter</button>
                     </form>
                 </li>
             @else

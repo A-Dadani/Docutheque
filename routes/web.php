@@ -20,11 +20,17 @@ Route::get('/', function () {
     return view('accueil');
 });
 
+// Show Register Form
+Route::get('/register', [UserController::class, 'register'])->middleware('guest');
+
 // Show Login Form
 Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
 
 // Authenticate User
 Route::post('/authenticate', [UserController::class, 'authenticate']);
+
+// Store User
+Route::post('/users', [UserController::class, 'store']);
 
 // Logout
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');

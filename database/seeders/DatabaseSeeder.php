@@ -3,7 +3,10 @@
 namespace Database\Seeders;
 
 // use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+
+use App\Models\Department;
 use Illuminate\Database\Seeder;
+use Illuminate\Support\Facades\DB;
 
 class DatabaseSeeder extends Seeder
 {
@@ -13,15 +16,20 @@ class DatabaseSeeder extends Seeder
     public function run(): void
     {
         $roles = ['admin', 'RespoCommunication', 'chefDep', 'employeDep'];
+        $deps = DB::table('Departments')->get();
         for($i=0;$i<40;$i++){
-            $dep = rand(1, 5);
             $selectedRole = rand(0, 3);
+            $selectedDep = $deps->random();
+            while ($selectedDep->name == 'blank') {
+                $selectedDep = $deps->random();
+            }
+            $dep = $selectedDep->id;
             if ($roles[$selectedRole] == 'admin' || $roles[$selectedRole] == 'RespoCommunication') {
-                $dep = 'all';
+                $dep = DB::table('Departments')->where('name', 'blank')->value('id');
             }
             \App\Models\User::factory(1)->create([
                 'role' => $roles[$selectedRole],
-                'department' => $dep,
+                'department_id' => $dep,
                 'confirmed' => !!rand(0, 1),
                 'password' => bcrypt('password'),
 
@@ -51,5 +59,18 @@ class DatabaseSeeder extends Seeder
         //         In reiciendis numquam et omnis magnam sit reprehenderit iure. Qui rerum quaerat est reiciendis velit vel tempore quae a neque error. Non sapiente velit et repudiandae excepturi ut minima quia non autem vero sed nobis consequatur est mollitia autem. Aut quaerat fugiat vel consequatur voluptatem ut aspernatur quia et laudantium voluptas aut odit ducimus sit perferendis consequuntur non temporibus optio.'
         //     ]);
         // }
+
+    //     for ($i = 0; $i < 6; ++$i) {
+    //         $name = '';
+    //         for ($j = 0; $j < 3; ++$j) {
+    //             $name .= chr(rand(65, 90));
+    //         }
+    //         \App\Models\Department::create([
+    //             'name' => $name
+    //         ]);
+    //     }
+    //     \App\Models\Department::create([
+    //         'name' => 'blank'
+    //     ]);
     }
 }
