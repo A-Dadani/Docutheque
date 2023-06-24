@@ -29,5 +29,17 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('delete-messages', function(User $user) {
             return (($user->confirmed) && (($user->role == 'RespoCommunication') || ($user->role == 'admin'))); //Change or add rules here
         });
+
+        Gate::define('view-registration-requests', function(User $user) {
+            return (($user->confirmed) && ($user->role == 'admin'));
+        });
+
+        Gate::define('delete-registration-requests', function(User $user) {
+            return (($user->confirmed) && ($user->role == 'admin'));
+        });
+
+        Gate::define('confirm-user', function(User $user) {
+            return (($user->confirmed) && ($user->role == 'admin'));
+        });
     }
 }

@@ -55,7 +55,7 @@
                 @if (auth()->user()->role == 'admin')
                     {{-- Administrateur / Chef --}}
                     <li>
-                        <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-user-group mr-1"></i>
+                        <a href="/users/requests" class="hover:text-laravel"><i class="fa-solid fa-user-group mr-1"></i>
                             Demandes d&apos;inscription</a>
                     </li>
                     <li>

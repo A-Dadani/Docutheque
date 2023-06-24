@@ -20,6 +20,15 @@ Route::get('/', function () {
     return view('accueil');
 });
 
+// Show Registeration Requests
+Route::get('/users/requests', [UserController::class, 'indexRegistrationRequests'])->middleware('auth');
+
+// Delete a user
+Route::delete('/users/requests/{user}', [UserController::class, 'destroy'])->middleware('auth');
+
+// Confirm a user
+Route::patch('/users/requests/{user}', [UserController::class, 'confirm'])->middleware('auth');
+
 // Show Register Form
 Route::get('/register', [UserController::class, 'register'])->middleware('guest');
 

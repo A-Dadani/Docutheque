@@ -6,6 +6,7 @@ use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Validation\Rule;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Validator;
 
 class UserController extends Controller
@@ -94,5 +95,46 @@ class UserController extends Controller
     
     public function register() {
         return view('Users.register', ['departments' => DB::table('Departments')->get()]);
+    }
+
+    public function indexRegistrationRequests() {
+        if (!Gate::allows('view-registration-requests')) {
+            abort(403);
+        }
+
+        $sqlReq = User::where('confirmed', '=', '0');
+        
+        if (request()->get('search') ?? false) {
+            $searchTerm = request()->get('search');
+            $sqlReq->where('name', 'like', '%' . $searchTerm . '%')
+                    ->orWhere('email', 'like', '%' . $searchTerm . '%');
+        }
+
+        return view('Users.RegistrationRequests', [
+            'requests' => $sqlReq->paginate(10)
+        ]);
+    }
+
+    public function destroy(User $user) {
+        if (!Gate::allows('delete-registration-requests')) {
+            abort(403);
+        }
+
+        $name = $user->name;
+        $user->delete();
+        return redirect('/users/requests')->with('message', 'Demande de ' . $name . ' supprimée avec succès');
+    }
+
+    public function confirm(User $user) {
+        if (!Gate::allows('confirm-user')) {
+            abort(403);
+        }
+
+        if ($user->confirmed) {
+            abort(400);
+        }
+
+        User::where('id', $user->id)->update(['confirmed' => true]);
+        return redirect('/users/requests')->with('message', 'Demande de ' . $user->name . ' acceptée avec succès');
     }
 }

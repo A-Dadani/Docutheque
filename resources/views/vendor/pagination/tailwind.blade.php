@@ -25,7 +25,7 @@
         <div class="hidden sm:flex-1 sm:flex sm:items-center sm:justify-between">
             <div>
                 <p class="text-sm text-gray-700 leading-5">
-                    {!! __('Montrant message') !!}
+                    {!! __('Montrant résultat') !!}
                     @if ($paginator->firstItem())
                         <span class="font-medium">{{ $paginator->firstItem() }}</span>
                         {!! __('à') !!}
@@ -35,7 +35,7 @@
                     @endif
                     {!! __('à partir de') !!}
                     <span class="font-medium">{{ $paginator->total() }}</span>
-                    {!! __('messages en total') !!}
+                    {!! __('résultats en total') !!}
                 </p>
             </div>
 
