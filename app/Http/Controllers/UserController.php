@@ -111,7 +111,7 @@ class UserController extends Controller
         }
 
         return view('Users.RegistrationRequests', [
-            'requests' => $sqlReq->paginate(10)
+            'requests' => $sqlReq->latest()->paginate(10)
         ]);
     }
 
