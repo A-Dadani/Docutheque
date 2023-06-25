@@ -41,5 +41,13 @@ class AuthServiceProvider extends ServiceProvider
         Gate::define('confirm-user', function(User $user) {
             return (($user->confirmed) && ($user->role == 'admin'));
         });
+
+        Gate::define('delete-department', function(User $user) {
+            return (($user->confirmed) && ($user->role == 'admin'));
+        });
+
+        Gate::define('add-department', function(User $user) {
+            return (($user->confirmed) && ($user->role == 'admin'));
+        });
     }
 }

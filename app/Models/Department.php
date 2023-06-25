@@ -13,6 +13,12 @@ class Department extends Model
         'name'
     ];
 
+    public function scopeFilter($query, array $filters) {
+        if ($filters['search'] ?? false) {
+            $query->where('name', 'like', '%' . request('search') . '%');
+        }
+    }
+
     public function users() {
         return $this->hasMany(User::class);
     }

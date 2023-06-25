@@ -59,11 +59,11 @@
                             Demandes d&apos;inscription</a>
                     </li>
                     <li>
-                        <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-users-gear mr-1"></i>
+                        <a href="/departments/manage" class="hover:text-laravel"><i class="fa-solid fa-users-gear mr-1"></i>
                             Gestion de d&eacute;partements</a>
                     </li>
                     <li>
-                        <a href="/messages" class="hover:text-laravel"><i class="fa-solid fa-file-lines mr-1"></i>
+                        <a href="/documents" class="hover:text-laravel"><i class="fa-solid fa-file-lines mr-1"></i>
                             Gestion de documents</a>
                     </li>
                     <li>
@@ -85,7 +85,7 @@
                 <li>
                     <form class="inline" action="/logout" method="POST">
                         @csrf
-                        <button type="submit"><i class="fa-solid fa-right-from-bracket mr-1"></i> Se déconnecter</button>
+                        <button type="submit"><i class="fa-solid fa-right-from-bracket mr-1"></i> Se d&eacute;connecter</button>
                     </form>
                 </li>
             @else

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\ContactMessageController;
+use App\Http\Controllers\DepartmentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -52,3 +53,12 @@ Route::get('/messages', [ContactMessageController::class, 'index'])->middleware(
 
 // Delete a Contact Message
 Route::delete('/messages/{message}', [ContactMessageController::class, 'destroy'])->middleware('auth');
+
+// Add a New Department
+Route::post('/departments', [DepartmentController::class, 'store'])->middleware('auth');
+
+// Show Department Management Page
+Route::get('/departments/manage', [DepartmentController::class, 'manage'])->middleware('auth');
+
+// Delete Deprtment
+Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->middleware('auth');

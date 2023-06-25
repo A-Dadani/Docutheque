@@ -58,7 +58,7 @@
                     <p>
                         Vous n&apos;avez pas de compte?
                         <a href="/register" class="text-laravel"
-                            >Contactez un administrateur</a
+                            >Cr&eacute;er une demande</a
                         >
                     </p>
                 </div>
