@@ -1,7 +1,7 @@
 <x-layout>
     @include('partials._search', [
         'placeholderText' => 'Rechercher un département...',
-        'name' => 'search'
+        'name' => 'search',
     ])
     <div class="mx-4">
         <div class="bg-gray-50 border border-gray-200 p-10 rounded">
@@ -39,9 +39,7 @@
                             @unless ($dpt->name == 'blank')
                                 <tr class="border-gray-300">
                                     <td class="px-4 py-8 border-t border-b border-gray-300 text-xl text-center">
-                                        <a href="/departments/{{ $dpt->id }}">
-                                            {{ strlen($dpt->name) > 35 ? substr($dpt->name, 0, 35) . '...' : $dpt->name }}
-                                        </a>
+                                        {{ strlen($dpt->name) > 35 ? substr($dpt->name, 0, 35) . '...' : $dpt->name }}
                                     </td>
                                     <td class="px-4 py-8 border-t border-b border-gray-300 text-xl text-center">
                                         <form action="/departments/{{ $dpt->id }}" method="POST">
