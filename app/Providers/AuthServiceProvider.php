@@ -2,6 +2,7 @@
 
 namespace App\Providers;
 
+use App\Models\Document;
 use App\Models\User;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Foundation\Support\Providers\AuthServiceProvider as ServiceProvider;
@@ -48,6 +49,21 @@ class AuthServiceProvider extends ServiceProvider
 
         Gate::define('add-department', function(User $user) {
             return (($user->confirmed) && ($user->role == 'admin'));
+        });
+
+        Gate::define('view-documents', function(User $user) {
+            return (($user->confirmed) 
+                && (($user->role == 'admin') || ($user->role == 'chefDep') || ($user->role == 'employeDep')));
+        });
+
+        Gate::define('delete-documents', function(User $user) {
+            return (($user->confirmed) 
+                && (($user->role == 'admin') || ($user->role == 'chefDep')));
+        });
+
+        Gate::define('access-specific-document', function(User $user, Document $document) {
+            return (($user->confirmed)
+                && (($user->role == 'admin') || ($user['department_id'] == $document['department_id'])));
         });
     }
 }

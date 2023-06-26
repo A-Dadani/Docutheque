@@ -3,9 +3,9 @@
         <div class="absolute top-4 left-3">
             <i class="fa fa-search text-gray-400 z-20 hover:text-gray-500"></i>
         </div>
-        <input type="text" name="search"
+        <input type="text" name="{{$name}}"
             class="h-14 w-full pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"
-            placeholder="{{$placeholderText}}" value="{{$_GET['search'] ?? ''}}"/>
+            placeholder="{{$placeholderText}}" value="{{$_GET[$name] ?? ''}}"/>
         <div class="absolute top-2 right-2">
             <button type="submit" class="h-10 px-3 text-white rounded-lg bg-red-500 hover:bg-red-600">
                 Rechercher

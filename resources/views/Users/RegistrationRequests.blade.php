@@ -1,6 +1,7 @@
 <x-layout>
     @include('partials._search', [
         'placeholderText' => 'Rechercher une demande...',
+        'name' => 'search'
     ])
 
     <div class="mx-4">

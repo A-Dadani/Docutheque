@@ -1,6 +1,7 @@
 <x-layout>
     @include('partials._search', [
         'placeholderText' => 'Rechercher un département...',
+        'name' => 'search'
     ])
     <div class="mx-4">
         <div class="bg-gray-50 border border-gray-200 p-10 rounded">
@@ -16,7 +17,7 @@
                         </div>
                         <input type="text" name="name"
                             class="h-14 w-full pl-10 pr-20 rounded-lg z-0 focus:shadow focus:outline-none"
-                            placeholder="Nom du d&eacute;partement" value="{{ $_GET['search'] ?? '' }}" />
+                            placeholder="Nom du d&eacute;partement" />
                         <div class="absolute top-2 right-2">
                             <button type="submit"
                                 class="h-10 px-3 text-white rounded-lg bg-blue-500 hover:bg-blue-600">

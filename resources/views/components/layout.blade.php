@@ -77,9 +77,10 @@
                             Messagerie</a>
                     </li>
                 @else
+                    {{-- Chef de département / Employé --}}
                     <li>
-                        <a href="/listings/manage" class="hover:text-laravel"><i class="fa-solid fa-gear mr-1"></i>
-                            Gestion des Documents</a>
+                        <a href="/documents" class="hover:text-laravel"><i class="fa-solid fa-file-lines mr-1"></i>
+                            Gestion de Documents</a>
                     </li>
                 @endif
                 <li>

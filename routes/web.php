@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ContactMessageController;
 use App\Http\Controllers\DepartmentController;
+use App\Http\Controllers\DocumentController;
 use App\Http\Controllers\UserController;
 use Illuminate\Support\Facades\Route;
 
@@ -62,3 +63,12 @@ Route::get('/departments/manage', [DepartmentController::class, 'manage'])->midd
 
 // Delete Deprtment
 Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->middleware('auth');
+
+// Show Documents
+Route::get('/documents', [DocumentController::class, 'index'])->middleware('auth');
+
+// Delete Document
+Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->middleware('auth');
+
+// Get a single document
+Route::get('/documents/{document}', [DocumentController::class, 'show'])->middleware('auth');
