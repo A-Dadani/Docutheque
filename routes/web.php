@@ -52,6 +52,8 @@ Route::post('/contactus', [ContactMessageController::class, 'store']);
 // Show All Contact Messages
 Route::get('/messages', [ContactMessageController::class, 'index'])->middleware('auth');
 
+Route::get('/messages/{message}', [ContactMessageController::class, 'show'])->middleware('auth');
+
 // Delete a Contact Message
 Route::delete('/messages/{message}', [ContactMessageController::class, 'destroy'])->middleware('auth');
 

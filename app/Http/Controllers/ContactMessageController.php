@@ -49,4 +49,12 @@ class ContactMessageController extends Controller
         $message->delete();
         return redirect('/messages')->with('message', 'Message supprimé avec succes');
     }
+
+    public function show(ContactMessage $message) {
+        if (!Gate::allows('view-messages')) {
+            abort(403);
+        }
+
+        return view('messages.show', ['message' => $message]);
+    } 
 }
