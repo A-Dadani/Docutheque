@@ -2,10 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Department;
 use App\Models\Document;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Gate;
 use Illuminate\Support\Facades\Storage;
+use Illuminate\Support\Facades\Validator;
 
 class DocumentController extends Controller
 {
@@ -49,14 +52,72 @@ class DocumentController extends Controller
             abort(403);
         }
 
-        $path = $document->department->name .'/'. $document->id . '.pdf';
-        $disk_private = storage_path('app/private/') . $path;
-        if(Storage::disk('private')->exists($path)){
-            $headers = [
-                'Content-Type' => 'application/pdf'
-            ];
-            return response()->download($disk_private, "Teste File", $headers, 'inline');
+        $disk_private = storage_path('app/private/') . $document->path;
+        if(Storage::disk('private')->exists($document->path)){
+            $response = response()->file($disk_private);
+
+            $response->headers->set('Content-Disposition', 'inline; filename="' . $document->objet . '.pdf"' );
+        
+            return $response;
         }
         abort(404);
+    }
+
+    public function create() {
+        if (!Gate::allows('create-documents')) {
+            abort(403);
+        }
+
+        return view('documents.create',  ['departments' => DB::table('Departments')->get()]);
+    }
+
+    public function store(Request $request) {
+        if (!Gate::allows('create-documents')) {
+            abort(403);
+        }
+
+        $validator = Validator::make(request()->all(), [
+            'objet' => 'required',
+            'sender' => 'required',
+            'receiver' => 'required',
+            'date_transmission' => 'required',
+            'keywords' => 'required',
+            'doc' => ['required', 'mimes:pdf', 'max: 10240']
+        ], [
+            'objet.required' => 'L\'objet ne peut pas être vide',
+            'sender.required' => 'Le destinateur ne peut pas être vide',
+            'receiver.required' => 'Le destinataire ne peut pas être vide',
+            'date_transmission.required' => 'Veuillez selectionner une date',
+            'keywords.required' => 'Les mots clés ne peuvent pas être vides',
+            'doc.required' => 'Veuillez selectionner un document',
+            'doc.mimes' => 'Le document doit être un PDF',
+            'doc.max' => 'Le document ne peut pas dépasser 10 Mo',
+        ]);
+
+        if ($validator->fails()) {
+            return back()
+                    ->withErrors($validator)
+                    ->withInput();
+        }
+
+        $department = auth()->user()->department;
+
+        if (auth()->user()->role == 'admin') {
+            $department = Department::where('id', $request->all()['department_id'])->first();
+        }
+
+        $arrKeywords = explode(',', $request->all()['keywords']);
+        $trimmedKeywordsArr = array_map('trim', $arrKeywords);
+        $trimmedKeywordsStr = implode(',', $trimmedKeywordsArr);
+
+        $request->merge([
+            'path' => $request->file('doc')->store($department->name, 'private'),
+            'user_id' => auth()->user()->id,
+            'department_id' => $department->id,
+            'keywords' => $trimmedKeywordsStr
+        ]);
+
+        Document::create($request->all());
+        return redirect('/documents')->with('message', 'Document ajouté avec succès');
     }
 }

@@ -11,8 +11,8 @@
             </div>
             <select id="lookup-method" class="mx-2 border border-gray-200 rounded p-2 w-full" required">
                 <option value="" selected disabled hidden>Selectionner un filtre</option>
-                <option value="sender">D&eacute;stinateur</option>
-                <option value="receiver">D&eacute;stinataire</option>
+                <option value="sender">Destinateur</option>
+                <option value="receiver">Destinataire</option>
                 <option value="objet">Objet</option>
                 <option value="keywords">Mots cl&eacute;s</option>
                 <option value="department">D&eacute;partement</option>
@@ -24,13 +24,15 @@
         </div>
     </form>
 
-    <a href="/" class="m-4 flex h-14">
-        <div
-            class="border-2 border-blue-500 px-3 text-white rounded-lg bg-blue-500 text-lg hover:bg-blue-600 w-full flex justify-content-center align-items-center">
-            <i class="fa-solid fa-plus mr-1"></i>
-            <div class="ml-1">Ajouter un document</div>
-        </div>
-    </a>
+    @unless (!Illuminate\Support\Facades\Gate::allows('create-documents'))
+        <a href="/documents/create" class="m-4 flex h-14">
+            <div
+                class="border-2 border-blue-500 px-3 text-white rounded-lg bg-blue-500 text-lg hover:bg-blue-600 w-full flex justify-content-center align-items-center">
+                <i class="fa-solid fa-plus mr-1"></i>
+                <div class="ml-1">Ajouter un document</div>
+            </div>
+        </a>
+    @endunless
 
     <div class="mx-4">
         <div class="bg-gray-50 border border-gray-200 p-10 rounded">
@@ -48,10 +50,10 @@
                                 OBJET
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg font-weight-bold text-center">
-                                D&Eacute;STINATEUR
+                                DESTINATEUR
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg font-weight-bold text-center">
-                                D&Eacute;STINATAIRE
+                                DESTINATAIRE
                             </td>
                             <td class="px-4 py-8 border-t border-b border-gray-300 text-lg font-weight-bold text-center">
                                 D&Eacute;PARTEMENT

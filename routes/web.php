@@ -67,6 +67,12 @@ Route::delete('/departments/{department}', [DepartmentController::class, 'destro
 // Show Documents
 Route::get('/documents', [DocumentController::class, 'index'])->middleware('auth');
 
+// Show Document Creation Form
+Route::get('/documents/create', [DocumentController::class, 'create'])->middleware('auth');
+
+// Store new document
+Route::post('/documents', [DocumentController::class, 'store'])->middleware('auth');
+
 // Delete Document
 Route::delete('/documents/{document}', [DocumentController::class, 'destroy'])->middleware('auth');
 

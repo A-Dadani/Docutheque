@@ -65,5 +65,12 @@ class AuthServiceProvider extends ServiceProvider
             return (($user->confirmed)
                 && (($user->role == 'admin') || ($user['department_id'] == $document['department_id'])));
         });
+
+        Gate::define('create-documents', function(User $user) {
+            return (($user->confirmed)
+                && ($user->role == 'admin' 
+                    || $user->role == 'chefDep')
+                    || $user->role == 'employeDep');
+        });
     }
 }
