@@ -55,7 +55,36 @@
                 @if (auth()->user()->role == 'admin')
                     {{-- Administrateur / Chef --}}
                     <li>
-                        <a href="/users/requests" class="hover:text-laravel"><i class="fa-solid fa-user-group mr-1"></i>
+                        <a href="/users/requests" class="hover:text-laravel">
+                            <i class="fa-solid fa-user-group mr-1 relative">
+                                <?php
+                                $reqCount = count(
+                                    Illuminate\Support\Facades\DB::table('users')
+                                        ->where('confirmed', '=', false)
+                                        ->get(),
+                                );
+                                ?>
+                                @unless ($reqCount == 0)
+                                    {{-- There are some requests --}}
+                                    @if ($reqCount < 10)
+                                        <i class="fa-solid fa-square absolute text-sm"
+                                            style="top: -0.75rem; left: -0.35rem; color: red"></i>
+                                        <span class="text-xs absolute"
+                                            style="font-family: &quot;Poppins&quot;, Arial, sans-serif; font-style: normal !important; color: #fafafa; top: -0.6rem; left: -0.175rem; font-weight: bold;">{{ $reqCount }}</span>
+                                    @elseif ($reqCount < 100)
+                                        <i class="fa-solid fa-square absolute text-sm"
+                                            style="top: -0.75rem;left: -0.35rem;color: red;transform: scale(1.35,1);"></i>
+                                        <span class="text-xs absolute"
+                                            style="font-family: &quot;Poppins&quot;, Arial, sans-serif;font-style: normal !important;color: #fafafa;top: -0.6rem;left: -0.35rem;font-weight: bold;">{{ $reqCount }}</span>
+                                    @else
+                                        {{-- Show 99+ if count is greated than 2 digits --}}
+                                        <i class="fa-solid fa-square absolute text-sm"
+                                            style="top: -0.75rem;left: -0.35rem;color: red;transform: scale(2,1);"></i>
+                                        <span class="text-xs absolute"
+                                            style="font-family: &quot;Poppins&quot;, Arial, sans-serif;font-style: normal !important;color: #fafafa;top: -0.6rem;left: -0.55rem;font-weight: bold;">99+</span>
+                                    @endif
+                                @endunless
+                            </i>
                             Demandes d&apos;inscription</a>
                     </li>
                     <li>
@@ -86,7 +115,8 @@
                 <li>
                     <form class="inline" action="/logout" method="POST">
                         @csrf
-                        <button type="submit"><i class="fa-solid fa-right-from-bracket mr-1"></i> Se d&eacute;connecter</button>
+                        <button type="submit"><i class="fa-solid fa-right-from-bracket mr-1"></i> Se
+                            d&eacute;connecter</button>
                     </form>
                 </li>
             @else
