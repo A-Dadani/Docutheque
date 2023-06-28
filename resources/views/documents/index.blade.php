@@ -102,6 +102,10 @@
                     </tbody>
                 </table>
             @else
+                <div class="text-center text-md">
+                    <i class="fa-solid fa-circle-info mr-1"></i>
+                    <span>Il n&apos;y a aucun document à afficher</span>
+                </div>
             @endunless
         </div>
     </div>

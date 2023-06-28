@@ -1,7 +1,7 @@
 <x-layout>
     @include('partials._search', [
         'placeholderText' => 'Rechercher une demande...',
-        'name' => 'search'
+        'name' => 'search',
     ])
 
     <div class="mx-4">
@@ -25,29 +25,27 @@
                                 </td>
                                 <td class="px-4 py-8 border-t border-b border-gray-300 text-md">
                                     <?php
-                                        switch ($req->role) {
-                                            case 'RespoCommunication':
-                                                echo 'Responsable de communication';
-                                                break;
-                                            case 'admin':
-                                                echo 'Administrateur';
-                                                break;
-                                            case 'chefDep':
-                                                echo 'Chef de d&eacute;partement';
-                                                break;
-                                            case 'employeDep':
-                                                echo 'Employ&eacute;';
-                                                break;
-                                            default:
-                                                echo 'Autre';
-                                                break;
-                                        }
+                                    switch ($req->role) {
+                                        case 'RespoCommunication':
+                                            echo 'Responsable de communication';
+                                            break;
+                                        case 'admin':
+                                            echo 'Administrateur';
+                                            break;
+                                        case 'chefDep':
+                                            echo 'Chef de d&eacute;partement';
+                                            break;
+                                        case 'employeDep':
+                                            echo 'Employ&eacute;';
+                                            break;
+                                        default:
+                                            echo 'Autre';
+                                            break;
+                                    }
                                     ?>
                                 </td>
                                 <td class="px-4 py-8 border-t border-b border-gray-300 text-md">
-                                    {{ ($req->department->name != 'blank')
-                                            ? $req->department->name
-                                            : '' }}
+                                    {{ $req->department->name != 'blank' ? $req->department->name : '' }}
                                 </td>
                                 <td class="px-4 py-8 border-t border-b border-gray-300 text-md">
                                     <form action="/users/requests/{{ $req->id }}" method="POST">
@@ -74,6 +72,10 @@
                     </tbody>
                 </table>
             @else
+                <div class="text-center text-md">
+                    <i class="fa-solid fa-circle-info mr-1"></i>
+                    <span>Il n&apos;y a aucune demande à afficher</span>
+                </div>
             @endunless
         </div>
     </div>

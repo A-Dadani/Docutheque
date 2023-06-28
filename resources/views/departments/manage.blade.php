@@ -32,7 +32,7 @@
                 </form>
             </header>
 
-            @unless (count($departments) == 0)
+            @unless (count($departments) == 1 || count($departments) == 0) {{-- 'blank' department --}}
                 <table class="w-full table-auto rounded-sm">
                     <tbody>
                         @foreach ($departments as $dpt)
@@ -57,6 +57,10 @@
                     </tbody>
                 </table>
             @else
+                <div class="text-center text-md">
+                    <i class="fa-solid fa-circle-info mr-1"></i>
+                    <span>Il n&apos;y a aucun d&eacute;partements à afficher</span>
+                </div>
             @endunless
         </div>
     </div>

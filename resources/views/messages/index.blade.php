@@ -1,7 +1,7 @@
 <x-layout>
     @include('partials._search', [
         'placeholderText' => 'Rechercher un message...',
-        'name' => 'search'
+        'name' => 'search',
     ])
     <div class="mx-4">
         <div class="bg-gray-50 border border-gray-200 p-10 rounded">
@@ -18,9 +18,7 @@
                             <tr class="border-gray-300">
                                 <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
                                     <a href="/messages/{{ $msg->id }}">
-                                        {{ strlen($msg->objet) > 35 
-                                            ? substr($msg->objet, 0, 35) . '...' 
-                                            : $msg->objet }}
+                                        {{ strlen($msg->objet) > 35 ? substr($msg->objet, 0, 35) . '...' : $msg->objet }}
                                     </a>
                                 </td>
                                 <td class="px-4 py-8 border-t border-b border-gray-300 text-lg">
@@ -44,6 +42,10 @@
                     </tbody>
                 </table>
             @else
+                <div class="text-center text-md">
+                    <i class="fa-solid fa-circle-info mr-1"></i>
+                    <span>Il n&apos;y a aucun message à afficher</span>
+                </div>
             @endunless
         </div>
     </div>
