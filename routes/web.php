@@ -25,8 +25,8 @@ Route::get('/', function () {
 // Show Registeration Requests
 Route::get('/users/requests', [UserController::class, 'indexRegistrationRequests'])->middleware('auth');
 
-// Delete a user
-Route::delete('/users/requests/{user}', [UserController::class, 'destroy'])->middleware('auth');
+// Delete a user request
+Route::delete('/users/requests/{user}', [UserController::class, 'destroyRequest'])->middleware('auth');
 
 // Confirm a user
 Route::patch('/users/requests/{user}', [UserController::class, 'confirm'])->middleware('auth');
@@ -43,6 +43,9 @@ Route::post('/authenticate', [UserController::class, 'authenticate']);
 // Store User
 Route::post('/users', [UserController::class, 'store']);
 
+// Delete a User
+Route::delete('/users/{user}', [UserController::class, 'destroy'])->middleware('auth');
+
 // Logout
 Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
 
@@ -52,6 +55,7 @@ Route::post('/contactus', [ContactMessageController::class, 'store']);
 // Show All Contact Messages
 Route::get('/messages', [ContactMessageController::class, 'index'])->middleware('auth');
 
+// Show a Signle Message
 Route::get('/messages/{message}', [ContactMessageController::class, 'show'])->middleware('auth');
 
 // Delete a Contact Message
@@ -62,6 +66,9 @@ Route::post('/departments', [DepartmentController::class, 'store'])->middleware(
 
 // Show Department Management Page
 Route::get('/departments/manage', [DepartmentController::class, 'manage'])->middleware('auth');
+
+//Show Single Department (Users So Far)
+Route::get('/departments/{department}', [DepartmentController::class, 'show'])->middleware('auth');
 
 // Delete Deprtment
 Route::delete('/departments/{department}', [DepartmentController::class, 'destroy'])->middleware('auth');

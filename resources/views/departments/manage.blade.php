@@ -39,7 +39,9 @@
                             @unless ($dpt->name == 'blank')
                                 <tr class="border-gray-300">
                                     <td class="px-4 py-8 border-t border-b border-gray-300 text-xl text-center">
-                                        {{ strlen($dpt->name) > 35 ? substr($dpt->name, 0, 35) . '...' : $dpt->name }}
+                                        <a href="/departments/{{ $dpt->id }}">
+                                            {{ strlen($dpt->name) > 35 ? substr($dpt->name, 0, 35) . '...' : $dpt->name }}
+                                        </a>
                                     </td>
                                     <td class="px-4 py-8 border-t border-b border-gray-300 text-xl text-center">
                                         <form action="/departments/{{ $dpt->id }}" method="POST">

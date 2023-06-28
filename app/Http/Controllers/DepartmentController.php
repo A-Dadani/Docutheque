@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\User;
 use App\Models\Department;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -11,7 +12,11 @@ use Illuminate\Support\Facades\Validator;
 class DepartmentController extends Controller
 {
     public function manage() {
-        return view('Departments.manage', ['departments' => Department::latest()->filter(request(['search']))->paginate(10)]);
+        if (!Gate::allows('manage-departments')) {
+            abort(403);
+        }
+
+        return view('departments.manage', ['departments' => Department::latest()->filter(request(['search']))->paginate(10)]);
     }
 
     public function destroy(Department $department) {
@@ -43,5 +48,31 @@ class DepartmentController extends Controller
 
         Department::create($request->all());
         return redirect('/departments/manage')->with('message', 'Le département ' . $request->all()['name'] . ' a été ajouté avec succès');
+    }
+
+    public function show(Department $department) {
+        if (!Gate::allows('manage-single-department', $department)) {
+            abort(403);
+        }
+
+        // Get Employees
+        $empl = User::where('role', '=', 'employeDep')
+                    ->where('confirmed', '=', '1')
+                    ->where('department_id', '=', $department->id)
+                    ->latest()
+                    ->get();
+        
+        //Get ChefsDep
+        $chefsDep = User::where('role', '=', 'chefDep')
+                        ->where('confirmed', '=', '1')
+                        ->where('department_id', '=', $department->id)
+                        ->latest()
+                        ->get();
+
+        return view('departments.show-users-in-dept', [
+            'chefsDep' => $chefsDep,
+            'employeesDep' => $empl,
+            'department' => $department
+        ]);
     }
 }

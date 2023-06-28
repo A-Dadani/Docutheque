@@ -115,8 +115,13 @@ class UserController extends Controller
         ]);
     }
 
-    public function destroy(User $user) {
+    public function destroyRequest(User $user) {
         if (!Gate::allows('delete-registration-requests')) {
+            abort(403);
+        }
+
+        // Check if rying to delete confirmed user
+        if ($user->confirmed) {
             abort(403);
         }
 
@@ -136,5 +141,19 @@ class UserController extends Controller
 
         User::where('id', $user->id)->update(['confirmed' => true]);
         return redirect('/users/requests')->with('message', 'Demande de ' . $user->name . ' acceptée avec succès');
+    }
+
+    public function destroy(User $user) {
+        if (!Gate::allows('delete-users')) {
+            abort(403);
+        }
+        
+        if (!$user->confirmed) {
+            abort(400);
+        }
+
+        $name = $user->name;
+        $user->delete();
+        return back()->with('message', 'Utilisateur ' . $name . ' supprimée avec succès');
     }
 }
