@@ -61,7 +61,7 @@
             @else
                 <div class="text-center text-md">
                     <i class="fa-solid fa-circle-info mr-1"></i>
-                    <span>Il n&apos;y a aucun d&eacute;partements à afficher</span>
+                    <span>Il n&apos;y a aucun d&eacute;partement à afficher</span>
                 </div>
             @endunless
         </div>

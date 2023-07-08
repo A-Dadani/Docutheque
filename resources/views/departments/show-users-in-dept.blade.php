@@ -42,10 +42,14 @@
                             </tr>
                         @endforeach
                     @else
-                        <div class="text-center text-md">
-                            <i class="fa-solid fa-circle-info mr-1"></i>
-                            <span>Il n&apos;y a aucun chef pour ce d&eacute;partement</span>
-                        </div>
+                        <tr class="border-gray-300">
+                            <td colspan="3">
+                                <div class="text-center text-md mt-2 mb-3">
+                                    <i class="fa-solid fa-circle-info mr-1"></i>
+                                    <span>Il n&apos;y a aucun chef pour ce d&eacute;partement</span>
+                                </div>
+                            </td>
+                        </tr>
                     @endunless
 
                     <tr class="border-gray-300">
@@ -79,10 +83,14 @@
                     </tbody>
                 </table>
             @else
-                <div class="text-center text-md">
-                    <i class="fa-solid fa-circle-info mr-1"></i>
-                    <span>Il n&apos;y a aucun chef pour ce d&eacute;partement</span>
-                </div>
+                <tr class="border-gray-300">
+                    <td colspan="3">
+                        <div class="text-center text-md mt-2 mb-3">
+                            <i class="fa-solid fa-circle-info mr-1"></i>
+                            <span>Il n&apos;y a aucun employ&eacute; pour ce d&eacute;partement</span>
+                        </div>
+                    </td>
+                </tr>
             @endunless
 
             </tbody>
