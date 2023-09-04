@@ -43,7 +43,7 @@
 </head>
 
 <body>
-    <nav class="flex justify-between items-center p-2">
+    <nav class="flex justify-between items-center p-2 pl-4">
         <a href="/">
             <div>
                 <img class="img-fluid" width="220" src="{{ asset('images/ProvinceSidiSlimane.png') }}"
