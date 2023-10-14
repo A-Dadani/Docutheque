@@ -47,10 +47,34 @@ User::create([
         ]);
 ``` 
 
+## Installer composer
+Maintenant que php est installé et que le code est bien configuré on doit installer `composer`:
+1. Allez vers [le site officiel de composer](https://getcomposer.org/download/) et téléchargez le en appuyant sur `Download and run Composer-Setup.exe`.
+2. Executez le fichier `Composer-Setup.exe` nouvellement téléchargé et installez le.
+
+## Installer les packets et générer la clé d'application
+1. Ouvrez une nouvelle instance d'interface de ligne de commandes Powershell en cherchant "Powershell"
+2. Navigez vers le chemin où vous avez extrait le code en utilisant la commande `cd`. Par exemple si le chemin est: `C:\Users\monutilisateur\Downloads\docutheque-main`, la commande sera 
+```bash
+cd "C:\Users\monutilisateur\Downloads\docutheque-main"
+``` 
+3. Exécutez la commande pour vous assurer que votre fichier `lock` contient des packages compatibles: 
+```bash
+composer update
+```
+4. Exécutez la commande pour vous assurer que tout les packages sont bien installés:
+```bash
+composer install
+```
+5. Exécutrez le commande pour générer la clé d'application:
+```bash
+php artisan key:generate
+```
+
 ## Lancer la migration et remplir la base de données
-Maintenant que php est installé et que le code est bien configuré on peut commencer la migration des bases de données.
+On peut maintenant commencer la migration des bases de données.
 1. Ouvrez une instance d'interface de ligne de commandes Powershell en cherchant "Powershell"
-2. Navigez vers le chemin où vous avez extrait le code en utilisant la commande `cd`. (Par exemple si le chemin est: `C:\Users\monutilisateur\Downloads\docutheque-main`, la commande sera 
+2. Navigez vers le chemin où vous avez extrait le code en utilisant la commande `cd`. Par exemple si le chemin est: `C:\Users\monutilisateur\Downloads\docutheque-main`, la commande sera 
 ```bash
 cd "C:\Users\monutilisateur\Downloads\docutheque-main"
 ``` 
