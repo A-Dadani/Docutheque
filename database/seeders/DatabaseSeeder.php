@@ -24,7 +24,7 @@ class DatabaseSeeder extends Seeder
         User::create([
             'name' => 'Administrateur Racine',
             'email' => 'racine@gmail.com',
-            'password' => bcrypt('S3crettt'),
+            'password' => bcrypt('Votre_mot_de_passe_ici'),
             'role' => 'admin',
             'department_id' => (DB::table('Departments')->where('name', '=', 'blank')->first())->id,
             'confirmed' => true
