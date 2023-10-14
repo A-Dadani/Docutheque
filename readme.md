@@ -16,8 +16,8 @@ Une bibliothèque complète pour la gestion de documents.
 2. Extraire l'archive et accéder au dossier nouvellement extrait
 
 ## Création des variables d'environnement
-Dans un premier temps, il faut créer un fichier "`.env`" en suivant les étapes:
-1. Trouvez le fichier nommé "`.env.example`" et le renommer en `.env`
+Dans un premier temps, il faut créer un fichier `.env` en suivant les étapes:
+1. Trouvez le fichier nommé `.env.example` et le renommer en `.env`
 2. Ouvrez le fichier `.env` nouvellement créé avec votre logiciel d'éditage de texte favori (VS Code, Sublime Text, Notepad++, ...)
 3. Modifiez les valeurs suivantes (Ligne 11 à 16):
     - `DB_CONNECTION` : C'est le type de la base de données à utiliser (par exemple: mysql)
@@ -31,7 +31,7 @@ Dans un premier temps, il faut créer un fichier "`.env`" en suivant les étapes
 
 ## Définition du mot de passe de l'administrateur racine
 L'administrateur racine est le compte administrateur créé par défaut qui permet l'acceptation d'autres demandes de création de compte. Il est donc indispensable de le bien sécuriser.
-1. Trouvez le fichier "`DatabaseSeeder.php`" situé dans le chemin `./database/seeders/` et ouvrez le avec votre logiciel d'éditage de texte favori (VS Code, Sublime Text, Notepad++, ...)
+1. Trouvez le fichier `DatabaseSeeder.php` situé dans le chemin `./database/seeders/` et ouvrez le avec votre logiciel d'éditage de texte favori (VS Code, Sublime Text, Notepad++, ...)
 2.  Modifier les lignes 25, 26, et 27 pour refléter votre choix de nom, email et mot de passe respectivement. Par exemple si on veut que le nom soit : "Lorem IPSUM" et que l'email soit "lorem.ipsum@gmail.com" et que le mot de passe soit "Secret.123" le l'invocation `User::create` sera:
 ```php
 User::create([
